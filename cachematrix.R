@@ -1,16 +1,31 @@
 
-## 这个函数是用来
-## functions do
+## This fun do as a matrix inverse
+	
+	
+	makeCacheMatrix <- function(x = matrix()) {
+	  m <- NULL             #m is a set for first
+	  set <- function(y){   #set a matrix
+	    x <<- y
+	    m <<- NULL
+	  }
+	  get <- function() x   #get data from a matrix
+	  setsolve <- function(inverse) m <<- inverse          	#get the inverse of a matrix
+	  getsolve <- function() m
+	  list(set = set, get = get, setsolve = setsolve, getsolve = getsolve)
+	}
+	
+	
 
-## Write a short comment describing this function
 
-makeCacheMatrix <- function(x = matrix()) {
-
-}
-
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-}
+	
+	cachesolve <- function(x, ...) {         	#checkr the matrix calculated inverse 
+	  m <- x$getsolve()
+	  if (!is.null(m)){
+	    message("getting cached data")
+	    return(m)
+	  }                                            	#if there not inverse calculated before
+	  data <- x$get()                               
+	  m <- solve(data)
+	  x$setsolve(m)
+	  m                                             #Return a matrix that is the inverse of 'x'
+	}
